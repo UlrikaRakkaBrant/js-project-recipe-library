@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  />
+
+  <title>Snack a Bite</title>
+</head>
+
+<body>
+  <header class="header">
+    <h3 class="logo">Wolt Foods</h3>
+    <nav>
+      <ul>
+        <li><a href="#Login">Log in</a></li>
+        <li><a href="#Register">Register</a></li>
+        <li><a href="#Languages">Languages</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="main-heading">
+    <div class="main-heading-box">
+      <h1>What's for dinner?</h1>
+    </div>
+  </div>
+
+  <main class="main">
+    <section class="search-recipies">
+
+      <input
+        type="search"
+        id="siteSearch"
+        class="search-field"
+        name="q"
+        aria-label="Search for recipes"
+        placeholder="Type your search"
+      />
+
+      <section
+        class="filter-bar"
+        id="filterBar"
+      >
+        <select
+          class="select-field"
+          name="cooking-time"
+          id="cookingTime"
+        >
+          <option
+            value="defaultOption"
+            disabled
+            selected
+            hidden
+          >Cooking time</option>
+          <option
+            class="option-value"
+            value="30"
+          >Fast</option>
+          <option
+            class="option-value"
+            value="60"
+          >Slow</option>
+        </select>
+      </section>
+
+    </section>
+
+    <section
+      class="recipe-container"
+      id="recipeContainer"
+    >
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    A Technigo Bootcamp project by Isabella Markskog, Anna Lenksjö, Yennie Leek & Elle Frankenberg
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
