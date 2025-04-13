@@ -3,65 +3,53 @@ const container = document.getElementById("recipeContainer")
 const searchField = document.getElementById("siteSearch")
 const cookingTime = document.getElementById("cookingTime")
 
-const recipies = ["SPAGHETTI", "PIZZA", "BURGER", "SANDWICH", "TACOS", "SALAD"]
-const recipeData = [
-  {
-    recipe: {
-      label: "Spaghetti",
-      image: "spaghetti.jpg",
-      totalTime: 30,
-      url: "https://example.com/spaghetti",
-      healthLabels: ["Vegetarian", "Low Carb", "High Protein"],
-    },
-  },
-  {
-    recipe: {
-      label: "Pizza",
-      image: "pizza.jpg",
-      totalTime: 45,
-      url: "https://example.com/pizza",
-      healthLabels: ["Vegetarian", "Gluten Free", "Low Carb"],
-    },
-  },
-]
+const apiKey = "6c307cd5c39f477b909ae0c07f6c06ca"
 
-const inIt = () => {
-  console.log("inIt")
+const endPoint = `https://api.spoonacular.com/recipes/random?number=100&apiKey=${apiKey}`
 
+const init = async () => {
+  const response = await fetchRecipes(endPoint)
+  renderRecipes(response.recipes)
+}
+
+const fetchRecipes = async (url) => {
+  try {
+    const response = await fetch(url)
+    const json = await response.json()
+    return json
+  }
+  catch (error) { console.log(error) }
+  return { recipes: [] }
+}
+
+const renderRecipes = (recipes) => {
   container.innerHTML = ''
-  recipeData.forEach((recipe) => {
+  recipes.forEach((recipe) => {
     container.innerHTML += `
       <div class="recipe-cards">
-       <img src="${recipe.recipe.image}" />
-        <p class="recipe-card-label">${recipe.recipe.label}</p>
+       <img src="${recipe.image}" />
+        <p class="recipe-card-label">${recipe.title}</p>
         <div class="recipe-time">
-         <p> <img src="clock-icon.png" class="clock-icon"/> ${recipe.recipe.totalTime} minutes</p>
+         <p> <img src="clock-icon.png" class="clock-icon"/> ${recipe.readyInMinutes} minutes</p>
          </div>
-        <p><a href="${recipe.recipe.url}" target="_blank" rel="noopener noreferrer">Check it out</a></p>
-        <div class="health-labels">
-          <button>
-          ${recipe.recipe.healthLabels[0]}
-          </button>
-          <button>
-          ${recipe.recipe.healthLabels[1]}
-          </button>
-          <button>
-          ${recipe.recipe.healthLabels[2]}
-          </button>
-        </div>
+        <p><a href="${recipe.sourceUrl}" target="_blank" rel="noopener noreferrer">Check it out</a></p>
       </div>`
   })
 }
 
-const onSearch = (event) => {
-  console.log("onSearch", event)
+const onSearch = async (event) => {
+  console.log("onSearch", event, searchField)
+
+  const endPoint2 = `https://api.spoonacular.com/recipes/random?number=${event.key}&apiKey=${apiKey}`
+  const response = await fetchRecipes(endPoint2)
+  renderRecipes(response.recipes)
 }
 
 const onSelect = (event) => {
   console.log("onSelect", event)
 }
 
-inIt()
+init()
 
 //EVENTLISTENERS
 searchField.addEventListener('keydown', onSearch)
