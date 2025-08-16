@@ -85,7 +85,7 @@ function renderRecipes(recipes) {
         <img src="${r.image}" class="recipe-img" alt="${r.title}" />
         <p class="recipe-card-label">${r.title}</p>
         <div class="recipe-time">
-          <p><img src="clock-icon.png" class="clock-icon" alt="" /> ${r.readyInMinutes ?? "—"} minutes</p>
+          <p> ${r.readyInMinutes ?? "—"} minutes</p>
         </div>
         <p>Likes: ${r.aggregateLikes ?? 0}</p>
         ${typeof r.pricePerServing === "number" ? `<p>Price/serving: ${money(r.pricePerServing)}</p>` : ""}
